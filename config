@@ -6,12 +6,6 @@
 FILES="./files.txt"
 DATADIR="./data"
 
-expand-tilde ()
-{
-    local expanded="${1/#\~/$HOME}"
-    echo $expanded
-}
-
 case $1 in
     gather)
         shift
@@ -26,22 +20,21 @@ case $1 in
         # make sure the data directory exists
         mkdir -p $DATADIR
         
-        while read file; do
+        cat $FILES | while read file; do
             if [[ -z $file ]]; then
                 # skip empty lines
                 continue 
             fi
 
-            file=$(expand-tilde $file)
-
-            if [[ ! -e $file ]]; then
+            file="${file/#\~/$HOME}"
+            if [[ ! -e "$file" ]]; then
                 echo "WARNING: $file does not exist"
                 continue
             fi
             cp "$file" "$DATADIR"
             echo "Backed up $file"
 
-        done <$FILES
+        done
         
         echo "Done gathering"
         ;;
@@ -59,13 +52,13 @@ case $1 in
             exit 0
         fi
         
-        while read file; do
-            if [[ -z $file ]]; then
+        cat $FILES | while read file; do
+            if [[ -z "$file" ]]; then
                 # skip empty lines
                 continue 
             fi
 
-            file=$(expand-tilde $file)
+            file="${file/#\~/$HOME}"
             path=$(dirname $file)
             name=$(basename $file)
     
@@ -76,7 +69,7 @@ case $1 in
             
             cp "$DATADIR/$name" $path
 
-        done <$FILES
+        done
 
         echo "Done restoring"
         ;;
