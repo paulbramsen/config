@@ -1,0 +1,89 @@
+#!/bin/bash
+
+# TODO: Put loop logic in a function
+# TODO: MD5 and append path in order to name mangle
+
+FILES="./files.txt"
+DATADIR="./data"
+
+expand-tilde ()
+{
+    local expanded="${1/#\~/$HOME}"
+    echo $expanded
+}
+
+case $1 in
+    gather)
+        shift
+    
+        echo "Gathering settings files"
+                
+        if [[ ! -f $FILES ]]; then
+            echo "ERROR: Must list files to be gathered in $FILES"
+            exit 1
+        fi
+        
+        # make sure the data directory exists
+        mkdir -p $DATADIR
+        
+        while read file; do
+            if [[ -z $file ]]; then
+                # skip empty lines
+                continue 
+            fi
+
+            file=$(expand-tilde $file)
+
+            if [[ ! -e $file ]]; then
+                echo "WARNING: $file does not exist"
+                continue
+            fi
+            cp "$file" "$DATADIR"
+            echo "Backed up $file"
+
+        done <$FILES
+        
+        echo "Done gathering"
+        ;;
+
+    
+    restore)
+        shift
+
+        read -p "Will overwrite files. Make sure you've gathered first. Continue?" -n 1 -r
+        echo # new line
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            echo "Restoring config files." 
+        else
+            echo "Cancelled settings restore."
+            exit 0
+        fi
+        
+        while read file; do
+            if [[ -z $file ]]; then
+                # skip empty lines
+                continue 
+            fi
+
+            file=$(expand-tilde $file)
+            path=$(dirname $file)
+            name=$(basename $file)
+    
+            if [[ ! -d $path ]]; then
+                echo "WARNING: the path $path does not exist. Not restoring file $name"
+                continue
+            fi  
+            
+            cp "$DATADIR/$name" $path
+
+        done <$FILES
+
+        echo "Done restoring"
+        ;;
+    
+    *)
+        echo "[gather|restore]"
+        ;;
+
+esac
+
