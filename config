@@ -59,15 +59,16 @@ case $1 in
             fi
 
             file="${file/#\~/$HOME}"
-            path=$(dirname $file)
-            name=$(basename $file)
+            path=$(dirname "$file")
+            name=$(basename "$file")
     
             if [[ ! -d $path ]]; then
                 echo "WARNING: the path $path does not exist. Not restoring file $name"
                 continue
             fi  
             
-            cp "$DATADIR/$name" $path
+            cp "$DATADIR/$name" "$path"
+            echo "Restored $file"
 
         done
 
