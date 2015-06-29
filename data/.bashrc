@@ -5,14 +5,10 @@ if [ -f ~/.bashrc_local ]; then
    source ~/.bashrc_local
 fi
 
-# tell ls to be colourful
-export CLICOLOR=1
-
-# tell grep to highlight matches
-export GREP_OPTIONS='--color=auto'
-
 # pretify the shell
 PS1='\[\e[0;33m\]\u\[\e[0m\]@\[\e[0;32m\]\h\[\e[0m\]:\[\e[0;34m\]\w\[\e[0m\]\$ '
+export CLICOLOR=1
+export GREP_OPTIONS='--color=auto'
 
 # source bash completion
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
@@ -28,7 +24,15 @@ alias slp='pmset sleepnow'
 alias emacs='/Applications/Emacs.app/Contents/MacOS/Emacs'
 
 # enable Git Completion
-source ~/.git-completion.sh
+if [ -f ~/.git-completion.sh ]; then
+  . ~/.git-completion.sh
+fi
+
+# make git shorter
+alias g="git"
+
+# make finding my ip easy
+alias ip="ifconfig | grep -Eo 'inet (addr:)?([0-9]*\.){3}[0-9]*' | grep -Eo '([0-9]*\.){3}[0-9]*' | grep -v '127.0.0.1'"
 
 # automatically restart SSH agent ###
 #
