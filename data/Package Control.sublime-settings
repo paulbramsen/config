@@ -1,0 +1,15 @@
+{
+	"in_process_packages":
+	[
+	],
+	"installed_packages":
+	[
+		"Djaneiro",
+		"Git",
+		"Package Control",
+		"Pretty JSON",
+		"Sass",
+		"SideBarEnhancements",
+		"SublimeCodeIntel"
+	]
+}
