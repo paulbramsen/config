@@ -1,5 +1,5 @@
 # config
-Simple script to back up config files/keep them in sync accross computers using git.
+My config files along with a simple script I wrote to back files/keep them in sync across computers using git.
 ```
 ./config gather
 ```
