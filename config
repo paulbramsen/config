@@ -9,24 +9,25 @@ DATADIR="./data"
 case $1 in
     gather)
         shift
-    
+
         echo "Gathering settings files"
-                
+
         if [[ ! -f $FILES ]]; then
             echo "ERROR: Must list files to be gathered in $FILES"
             exit 1
         fi
-        
+
         # make sure the data directory exists
         mkdir -p $DATADIR
-        
+
         cat $FILES | while read file; do
             if [[ -z $file ]]; then
                 # skip empty lines
-                continue 
+                continue
             fi
 
-            file="${file/#\~/$HOME}"
+            file="${file/#\~/$HOME}" # expand ~
+
             if [[ ! -e "$file" ]]; then
                 echo "WARNING: $file does not exist"
                 continue
@@ -35,38 +36,38 @@ case $1 in
             echo "Backed up $file"
 
         done
-        
+
         echo "Done gathering"
         ;;
 
-    
+
     restore)
         shift
 
         read -p "Will overwrite files. Make sure you've gathered first. Continue?" -n 1 -r
         echo # new line
         if [[ $REPLY =~ ^[Yy]$ ]]; then
-            echo "Restoring config files." 
+            echo "Restoring config files."
         else
             echo "Cancelled settings restore."
             exit 0
         fi
-        
+
         cat $FILES | while read file; do
             if [[ -z "$file" ]]; then
                 # skip empty lines
-                continue 
+                continue
             fi
 
-            file="${file/#\~/$HOME}"
+            file="${file/#\~/$HOME}" # expand ~
             path=$(dirname "$file")
             name=$(basename "$file")
-    
+
             if [[ ! -d $path ]]; then
                 echo "WARNING: the path $path does not exist. Not restoring file $name"
                 continue
-            fi  
-            
+            fi
+
             cp "$DATADIR/$name" "$path"
             echo "Restored $file"
 
@@ -74,7 +75,7 @@ case $1 in
 
         echo "Done restoring"
         ;;
-    
+
     *)
         echo "[gather|restore]"
         ;;
