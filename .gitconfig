@@ -1,0 +1,28 @@
+[push]
+	default = current
+[rerere]
+	enabled = true
+[core]
+	precomposeunicode = true
+	excludesfile = /Users/paul_bramsen/.gitignore_global
+	sparseCheckout = true
+[user]
+	name = Paul Bramsen
+	email = prb@paulbramsen.com
+	signingkey = 9FF3416E9DB723BF08556D0F41328D8FFB80E5F2
+[commit]
+	gpgsign = true
+[log]
+	showsignature = true
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+
+[alias]
+    t = log --graph --decorate --oneline
+    tv = log --graph --decorate
+    ta = log --graph --full-history --all --color --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s"
+    
