@@ -1,7 +1,0 @@
-~/.bashrc
-~/.bash_profile
-~/.vimrc
-~/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings
-~/Library/Application Support/Sublime Text 3/Packages/User/Package Control.sublime-settings
-~/.iterm-2-settings/com.googlecode.iterm2.plist
-
