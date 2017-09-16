@@ -23,7 +23,7 @@
 	trustExitCode = true
 
 [alias]
-    t = log --graph --decorate --oneline
-    tv = log --graph --decorate
-    ta = log --graph --full-history --all --color --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s"
+	t = log --graph --decorate --oneline
+	tv = log --graph --decorate
+	ta = log --graph --full-history --all --color --pretty=format:"%x1b[31m%h%x09%x1b[32m%d%x1b[0m%x20%s"
     
