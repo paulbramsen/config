@@ -1,3 +1,5 @@
+[include]
+	path = .gitconfig_local
 [push]
 	default = current
 [rerere]
@@ -8,7 +10,6 @@
 	sparseCheckout = true
 [user]
 	name = Paul Bramsen
-	email = prb@paulbramsen.com
 	signingkey = 9FF3416E9DB723BF08556D0F41328D8FFB80E5F2
 [commit]
 	gpgsign = true
