@@ -87,7 +87,7 @@ source $ZSH/oh-my-zsh.sh
 
 # MY CHANGES
 
-source .zshrc_local
+source ~/.zshrc_local
 
 # GPG
 export GPG_TTY=$(tty)
