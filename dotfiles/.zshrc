@@ -1,5 +1,8 @@
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+# export PATH=/usr/local/bin:$HOME/bin:$PATH
+
+# For PIP CLI stuff 
+export PATH=~/.local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
@@ -7,7 +10,7 @@ export ZSH=$HOME/.oh-my-zsh
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="agnoster"
+ZSH_THEME="robbyrussell"
 DEFAULT_USER=`whoami`
 
 # Uncomment the following line to use case-sensitive completion.
@@ -52,7 +55,7 @@ DEFAULT_USER=`whoami`
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git) # git
 
 source $ZSH/oh-my-zsh.sh
 
@@ -98,4 +101,20 @@ bindkey \^U backward-kill-line
 # find my public IP
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias ipv6="dig +short -6 myip.opendns.com @resolver1.opendns.com"
+
+# source z!
+source $(brew --prefix)/etc/profile.d/z.sh
+
+# for tmux
+export EDITOR=vim
+
+# rbenv
+#export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+
+# pyenv
+eval "$(pyenv init -)"
+
+# END MY CHANGES
+
 
