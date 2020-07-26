@@ -11,6 +11,7 @@
 [user]
 	name = Paul Bramsen
 	signingkey = 9FF3416E9DB723BF08556D0F41328D8FFB80E5F2
+	email = paul.bramsen@airbnb.com
 [commit]
 	gpgsign = true
 [log]
@@ -29,3 +30,7 @@
     
 [oh-my-zsh]
 	hide-status = 1
+[color]
+	ui = auto
+[pull]
+	ff = only
