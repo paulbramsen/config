@@ -119,6 +119,25 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
 [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
+function branch-clean {
+  if [[ "$1" != '-f' ]]; then
+    echo 'Running in soft mode. Add -f to delete branches.'
+  fi
+  for b in $(git for-each-ref refs/heads --format="%(refname:short)"); do  # Go through each branch
+    # git cherry prefixes each commit with "+" if it's not included and "-" if it is, so check if there are no "+" lines:
+    if [[ "$b" != 'master' ]]; then
+      if [[ ! $(git cherry master $b | grep "^+") ]]; then
+       if [[ "$1" = '-f' ]]; then
+          git branch -D $b
+        else
+          echo "Branch ready for cleanup: $b"
+        fi
+      fi
+    fi
+  done
+}
+
+
 # END MY CHANGES
 
 
